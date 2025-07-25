@@ -3,134 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lunex Consult - Assignment Inquiry</title>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <title>Lunex Consult | YouTube Video</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #000;
+      background-color: #000;
       color: #fff;
     }
-    h1 {
+
+    .youtube-container {
+      padding: 40px 20px;
       text-align: center;
-      padding: 30px;
+    }
+
+    .youtube-container h2 {
       color: #00ffcc;
+      margin-bottom: 20px;
     }
-    .floating-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #00ffcc;
-      color: #000;
-      padding: 12px 16px;
-      border-radius: 50px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ffcc;
-      z-index: 999;
-    }
-    .form-popup {
-      display: none;
-      position: fixed;
-      bottom: 80px;
-      right: 25px;
-      background: #1a1a2e;
-      padding: 20px;
-      border-radius: 10px;
-      width: 320px;
-      z-index: 999;
-      box-shadow: 0 0 10px #00ffcc;
-    }
-    .form-popup input,
-    .form-popup button {
+
+    .youtube-video {
+      position: relative;
       width: 100%;
-      margin-top: 10px;
-      padding: 8px;
-      border-radius: 4px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
     }
-    .form-popup label {
-      margin-top: 10px;
-      display: block;
-      color: #fff;
-    }
-    .form-popup button {
-      background-color: #00ffcc;
-      color: #000;
-      font-weight: bold;
+
+    .youtube-video iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
       border: none;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Lunex Consult</h1>
 
-  <!-- Floating Assignment Help Button -->
-  <div class="floating-btn" onclick="toggleForm()">Assignment Help?</div>
+  <!-- YouTube Section -->
+  <section class="youtube-container">
+    <h2>Watch Our YouTube Video</h2>
+    <div class="youtube-video">
+      <!-- Replace the link below with your YouTube video ID -->
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </section>
 
-  <!-- Floating Form -->
-  <div class="form-popup" id="assignmentForm">
-    <form id="assignment-inquiry-form">
-      <label>Type of Assignment:</label>
-      <input type="text" name="type_of_assignment" required>
-
-      <label>Word Count:</label>
-      <input type="number" name="word_count" required>
-
-      <label>Due Date:</label>
-      <input type="date" name="due_date" required>
-
-      <label>Upload File:</label>
-      <input type="file" id="file_input" required>
-
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-
-  <!-- EmailJS Script -->
-  <script>
-    emailjs.init("cmq8Rtphvl8EkYlrh"); // Replace with your EmailJS public key
-
-    const form = document.getElementById('assignment-inquiry-form');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const fileInput = document.getElementById('file_input');
-      const file = fileInput.files[0];
-
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        const base64File = event.target.result.split(',')[1];
-
-        const data = {
-          type_of_assignment: form.type_of_assignment.value,
-          word_count: form.word_count.value,
-          due_date: form.due_date.value,
-          file_name: file.name,
-          file_data: base64File
-        };
-
-        emailjs.send("service_y3ukzb9", "template_i0nzvaj", data)
-          .then(() => {
-            alert("Assignment submitted successfully!");
-            form.reset();
-            toggleForm();
-          })
-          .catch((error) => {
-            console.error("EmailJS Error:", error);
-            alert("Failed to send! Please try again.");
-          });
-      };
-
-      reader.readAsDataURL(file);
-    });
-
-    function toggleForm() {
-      const formBox = document.getElementById("assignmentForm");
-      formBox.style.display = (formBox.style.display === "block") ? "none" : "block";
-    }
-  </script>
 </body>
 </html>
