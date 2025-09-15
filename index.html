@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lunex Consult</title>
+  <title>Lunex Consult - Login</title>
   <style>
     body {
       margin: 0;
@@ -18,6 +18,50 @@
       padding-top: 20px;
     }
 
+    .hidden {
+      display: none;
+    }
+
+    /* Login form */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #111;
+    }
+
+    .login-box {
+      background: #1a1a2e;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .login-box button {
+      background-color: #00ffcc;
+      color: #000;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Main content styles */
     .youtube-section, .form-section {
       padding: 40px 20px;
       max-width: 800px;
@@ -63,7 +107,7 @@
       border-radius: 4px;
     }
 
-    button {
+    button[type="submit"] {
       margin-top: 20px;
       background-color: #00ffcc;
       color: #000;
@@ -99,49 +143,82 @@
 </head>
 <body>
 
-  <!-- YouTube Video Section -->
- <div style="text-align: center; padding: 40px; background-color: #000;">
-  <h2 style="color: #00ffcc;">Watch Our YouTube Video</h2>
-  <iframe 
-    width="560" 
-    height="315" 
-    src="https://www.youtube.com/embed/duk-mUJbpVY" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen>
-  </iframe>
-</div>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+      <p id="error" style="color:red; display:none;">Invalid credentials!</p>
+    </div>
+  </div>
 
+  <!-- Main Content (hidden until login) -->
+  <div id="mainContent" class="hidden">
 
-  <!-- Assignment Services Form -->
-  <section class="form-section">
-    <h2>Services Inquiry</h2>
-    <form action="https://formsubmit.co/prash8687@gmail.com" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="New Assignment Request">
-      <input type="hidden" name="_template" value="box">
+    <!-- YouTube Video Section -->
+    <div style="text-align: center; padding: 40px; background-color: #000;">
+      <h2 style="color: #00ffcc;">Watch Our YouTube Video</h2>
+      <iframe 
+        width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/duk-mUJbpVY" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
 
-      <label for="type">Type of Video:</label>
-      <input type="text" name="Type of Assignment" id="type" required>
+    <!-- Assignment Services Form -->
+    <section class="form-section">
+      <h2>Services Inquiry</h2>
+      <form action="https://formsubmit.co/prash8687@gmail.com" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Assignment Request">
+        <input type="hidden" name="_template" value="box">
 
-      <label for="words">Video Lenth:</label>
-      <input type="number" name="Word Count" id="words" required>
+        <label for="type">Type of Video:</label>
+        <input type="text" name="Type of Assignment" id="type" required>
 
-      <label for="due">Date:</label>
-      <input type="date" name="Due Date" id="due" required>
+        <label for="words">Video Length:</label>
+        <input type="number" name="Word Count" id="words" required>
 
-      <label for="file">Upload File:</label>
-      <input type="file" name="attachment" id="file" required>
+        <label for="due">Date:</label>
+        <input type="date" name="Due Date" id="due" required>
 
-      <button type="submit">Submit Video</button>
-    </form>
-  </section>
+        <label for="file">Upload File:</label>
+        <input type="file" name="attachment" id="file" required>
 
-  <!-- Floating WhatsApp Button -->
-  <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat on WhatsApp">
-    &#x1F4AC;
-  </a>
+        <button type="submit">Submit Video</button>
+      </form>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a class="whatsapp-float" href="https://wa.me/12272049578" target="_blank" title="Chat on WhatsApp">
+      &#x1F4AC;
+    </a>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      // Change these credentials as needed
+      const validUser = "admin";
+      const validPass = "1234";
+
+      if (user === validUser && pass === validPass) {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("mainContent").classList.remove("hidden");
+      } else {
+        error.style.display = "block";
+      }
+    }
+  </script>
 
 </body>
 </html>
